@@ -1,0 +1,42 @@
+All collectjions have  timestamps
+
+USER
+	username
+	email
+	password
+	isAdmin
+
+PRODUCT
+	title
+	desc
+	img
+	categories
+	size
+	color 
+	price
+	
+CART
+	userId
+	products  [
+			{
+				productId
+				quantity
+			}
+		  ]
+
+ORDER
+	userId
+	products  [
+			{
+				productId
+				quantity
+			}
+		  ]
+	amount
+	address
+	status
+
+db entert abc
+pass store 123
+
+	
