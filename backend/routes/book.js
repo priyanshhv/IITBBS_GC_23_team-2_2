@@ -10,6 +10,7 @@ router.post('/', verifyTokenAndAdmin, async (req, res) => {
     const book = await newBook.save();
     res.status(201).json(book);
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
@@ -29,7 +30,7 @@ router.put('/:id', verifyTokenAndAdmin, async (req, res) => {
 });
 
 // Borrow a book
-router.post('/:id/borrow', verifyToken, async (req, res) => {
+router.post('/:id/borrow',verifyTokenAndAdmin, async (req, res) => {
   try {
     const book = await Book.findByIdAndUpdate(
       req.params.id,
@@ -37,7 +38,7 @@ router.post('/:id/borrow', verifyToken, async (req, res) => {
         $inc: { availableCount: -1 },
         $push: {
           borrowedBy: {
-            user: req.user._id,
+            user: req.body.userId,
             borrowedAt: Date.now(),
             returnDue: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
           },
@@ -52,7 +53,7 @@ router.post('/:id/borrow', verifyToken, async (req, res) => {
 });
 
 // Return a book
-router.post('/:id/return', verifyToken, async (req, res) => {
+router.post('/:id/return', verifyTokenAndAdmin, async (req, res) => {
   try {
     const book = await Book.findByIdAndUpdate(
       req.params.id,
@@ -60,7 +61,7 @@ router.post('/:id/return', verifyToken, async (req, res) => {
         $inc: { availableCount: 1 },
         $pull: {
           borrowedBy: {
-            user: req.user._id,
+            user: req.body.userId,
           },
         },
       },

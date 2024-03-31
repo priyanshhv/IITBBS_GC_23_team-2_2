@@ -7,8 +7,7 @@ const { verifyToken } = require('../middleware/verifyToken');
 router.post('/', verifyToken, async (req, res) => {
   try {
     const newReport = new LostAndFound({
-      ...req.body,
-      user: req.user._id,
+      ...req.body
     });
 
     const report = await newReport.save();

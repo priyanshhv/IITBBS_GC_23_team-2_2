@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -15,12 +16,17 @@ const verifyToken = (req, res, next) => {
 };
 
 const verifyTokenAndAdmin = (req, res, next) => {
-  verifyToken(req, res, () => {
-    if (req.user.role === 'admin') {
+  verifyToken(req, res, async () => {
+    try {
+    const user = await User.findById(req.user.id);
+    if (user.role === 'admin') {
       next();
     } else {
       res.status(403).json({ message: 'You are not authorized' });
     }
+  } catch (err) {
+    res.status(500).json(err);
+  }
   });
 };
 

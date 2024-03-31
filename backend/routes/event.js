@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 const Event = require('../models/Event');
 const { verifyTokenAndAdmin,verifyToken } = require('../middleware/verifyToken');
+const User = require('../models/User');
 
 // Create a new event (admin only)
 router.post('/', verifyTokenAndAdmin, async (req, res) => {
   try {
     const newEvent = new Event({
-      ...req.body,
-      postedBy: req.user._id,
+      ...req.body
     });
 
     const event = await newEvent.save();
@@ -33,14 +33,15 @@ router.put('/:id', verifyTokenAndAdmin, async (req, res) => {
 });
 
 // Add comment to an event
-router.post('/:id/comments', verifyToken, async (req, res) => {
+router.post('/:id', verifyToken, async (req, res) => {
   try {
+    const user = await User.findById(req.body.postedBy);
     const event = await Event.findByIdAndUpdate(
       req.params.id,
       {
         $push: {
           comments: {
-            user: req.user._id,
+            user: user._id,
             comment: req.body.comment,
           },
         },

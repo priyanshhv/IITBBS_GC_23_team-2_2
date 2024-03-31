@@ -7,8 +7,7 @@ const { verifyToken, verifyTokenAndAdmin } = require('../middleware/verifyToken'
 router.post('/', verifyToken, async (req, res) => {
   try {
     const newOrder = new Order({
-      ...req.body,
-      user: req.user._id,
+      ...req.body
     });
 
     // Calculate queue number based on the number of pending orders
