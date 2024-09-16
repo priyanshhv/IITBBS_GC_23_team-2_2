@@ -1,3 +1,42 @@
+# Campus Companion
+
+**Project Name:** Campus Companion  
+**Award:** Second Position in the General Championship at IIT Bhubaneswar
+
+## Project Overview
+
+Campus Companion is an integrated solution designed specifically for IIT Bhubaneswar to address several prevalent issues on campus:
+
+- Long waiting times and inefficient ordering processes at college eateries.
+- Absence of an official platform for reporting and tracking lost and found items.
+- Limited information and interaction regarding campus events.
+
+## Key Features
+
+### User Authentication
+- **Roles:** Student, Faculty, Admin, Restaurant Owner
+- Secure login and role-based access control.
+
+### Food Ordering
+- **Queue Number System:** Streamlines the ordering process and reduces waiting times at campus eateries.
+- **Real-Time Updates:** Users receive updates on their order status.
+
+### Lost and Found
+- **Reporting:** Allows users to report lost items and register found items.
+- **Tracking:** Users can track the status of their lost or found items.
+
+### Events
+- **Information Hub:** Provides detailed information about upcoming events on campus.
+- **Interaction:** Facilitates student interaction and engagement with campus events.
+
+### Library
+- **Book Status:** Users can check the availability and status of books in the campus library.
+
+### Prerequisites
+- [Node.js](https://nodejs.org/)
+- [MongoDB](https://www.mongodb.com/)
+- [Express.js](https://expressjs.com/)
+- [React](https://reactjs.org/)
 
 ## Register
 
